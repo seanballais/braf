@@ -29,5 +29,5 @@
  */
 #ifndef BRAF_H
     #define BRAF_H
-        void braf_interpretCode(char *code, char *dataPtr);
+        char *braf_interpretCode(char *code, char *dataPtr);
 #endif

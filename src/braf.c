@@ -29,9 +29,10 @@
  */
 #include <stdio.h>
 
-void braf_interpretCode(char *code, char *dataPtr)
+char *braf_interpretCode(char *code, char *dataPtr)
 {
     char currChar = '\0';
+    char *output;
     int loop = 0;
     for (int index = 0; code[index] != '\0'; index++) {
         currChar = code[index];
@@ -45,8 +46,10 @@ void braf_interpretCode(char *code, char *dataPtr)
             *(dataPtr++):
         } else if (currChar == '.') { // Output the data
             putchar(*dataPtr);
+            strcat(output, *dataPtr);
         } else if (currChar == ',') { // Input data
             getchar(*dataPtr);
+            strcat(output, *dataPtr);
         } else if (currChar == '[') { // Start of a loop
             continue;
         } else if (currChar == ']' && *dataPtr) { // End of a loop
