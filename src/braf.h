@@ -4,10 +4,10 @@
  *     - Bea Santiago (<>)
  *     - Kenneth Cu (<>)
  *     - Sean Ballais (@seanballais <sfballais123@gmail.com>)
- *     -
+ *     - Ivan Puayap
  *
  * braf is licensed under the MIT License (MIT)
- * Copyright (c) 2015 Bea Santiago, Kenneth Cu, and Sean Ballais
+ * Copyright (c) 2015 Bea Santiago, Kenneth Cu, Ivan Puayap, and Sean Ballais
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

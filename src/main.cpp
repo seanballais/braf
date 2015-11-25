@@ -29,42 +29,16 @@
  */
 #include <stdio.h>
 
-char *braf_interpretCode(char *code, char *dataPtr)
-{
-    char currChar = '\0';
-    char *output;
-    int loop = 0;
-    for (int index = 0; code[index] != '\0'; index++) {
-        currChar = code[index];
-        if (currChar == '+') { // Increment the value in the pointer by 1
-            (*dataPtr)++;
-        } else if (currChar == '-') { // Decrement the value in the pointer by 1
-            (*dataPtr)--;
-        } else if (currChar == '<') { // Move one step back in the tape
-            *(dataPtr--);
-        } else if (currChar == '>') { // Move one step forward in the tape
-            *(dataPtr++):
-        } else if (currChar == '.') { // Output the data
-            putchar(*dataPtr);
-            strcat(output, *dataPtr);
-        } else if (currChar == ',') { // Input data
-            getchar(*dataPtr);
-            strcat(output, '\n'); // Adding a newline to the output to match the output from the CLI
-            strcat(output, *dataPtr);
-        } else if (currChar == '[') { // Start of a loop
-            continue;
-        } else if (currChar == ']' && *dataPtr) { // End of a loop
-            loop = 1;
-            while (loop > 0) {
-                currChar = code[--index];
-                if (currChar == '[') {
-                    loop--;
-                } else if (currChar == ']') {
-                    loop++;
-                }
-            }
-        }
-    }
+#include "braf.h"
 
-    return output;
+int main(void)
+{
+    char tape[30000] = {0};
+    char *tapePtr = &tape;
+    char *code;
+    printf("Braf - a brainfuck interpreter\n");
+    scanf("%s", &code);
+    printf("Output:\n%s", braf_interpretCode(code, tapePtr));
+
+    return 0;
 }
