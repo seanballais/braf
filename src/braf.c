@@ -28,11 +28,11 @@
  * SOFTWARE.
  */
 #include <stdio.h>
+#include <string.h>
 
-char *braf_interpretCode(char *code, char *dataPtr)
+void braf_interpretCode(char *code, char *dataPtr)
 {
     char currChar = '\0';
-    char *output;
     int loop = 0;
     for (int index = 0; code[index] != '\0'; index++) {
         currChar = code[index];
@@ -41,16 +41,13 @@ char *braf_interpretCode(char *code, char *dataPtr)
         } else if (currChar == '-') { // Decrement the value in the pointer by 1
             (*dataPtr)--;
         } else if (currChar == '<') { // Move one step back in the tape
-            *(dataPtr--);
+            dataPtr--;
         } else if (currChar == '>') { // Move one step forward in the tape
-            *(dataPtr++):
+            dataPtr++;
         } else if (currChar == '.') { // Output the data
-            putchar(*dataPtr);
-            strcat(output, *dataPtr);
+            printf("%c", *dataPtr);
         } else if (currChar == ',') { // Input data
-            getchar(*dataPtr);
-            strcat(output, '\n'); // Adding a newline to the output to match the output from the CLI
-            strcat(output, *dataPtr);
+            *dataPtr = getchar();
         } else if (currChar == '[') { // Start of a loop
             continue;
         } else if (currChar == ']' && *dataPtr) { // End of a loop
@@ -65,6 +62,4 @@ char *braf_interpretCode(char *code, char *dataPtr)
             }
         }
     }
-
-    return output;
 }
