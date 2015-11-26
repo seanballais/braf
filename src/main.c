@@ -28,7 +28,6 @@
  * SOFTWARE.
  */
 #include <stdio.h>
-#include <cs50.h>
 
 #include "braf.h"
 
@@ -36,10 +35,10 @@ int main(void)
 {
     char tape[30000] = {0};
     char *tapePtr = tape;
-    char *code;
+    string code = NULL;
     printf("Braf - a brainfuck interpreter\n");
     printf("Input the code:\n");
-    code = GetString();
+    fgets(code, 100, stdin);
     printf("\nOutput:");
     braf_interpretCode(code, tapePtr);
     printf("\n");

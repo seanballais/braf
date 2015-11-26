@@ -45,7 +45,7 @@ void braf_interpretCode(char *code, char *dataPtr)
         } else if (currChar == '>') { // Move one step forward in the tape
             dataPtr++;
         } else if (currChar == '.') { // Output the data
-            printf("%c", *dataPtr);
+            putchar(*dataPtr);
         } else if (currChar == ',') { // Input data
             *dataPtr = getchar();
         } else if (currChar == '[') { // Start of a loop
