@@ -27,41 +27,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include "braf.h"
+#include "interactive_mode.h"
 
 #include <stdio.h>
 #include <string.h>
 
-void braf_interpretCode(char *code, char *dataPtr)
+int interactiveMode(char *dataPtr)
 {
-    char currChar = '\0';
-    int loop = 0;
-    for (int index = 0; code[index] != '\0'; index++) {
-        currChar = code[index];
-        if (currChar == '+') { // Increment the value in the pointer by 1
-            (*dataPtr)++;
-        } else if (currChar == '-') { // Decrement the value in the pointer by 1
-            (*dataPtr)--;
-        } else if (currChar == '<') { // Move one step back in the tape
-            dataPtr--;
-        } else if (currChar == '>') { // Move one step forward in the tape
-            dataPtr++;
-        } else if (currChar == '.') { // Output the data
-            putchar(*dataPtr);
-        } else if (currChar == ',') { // Input data
-            *dataPtr = getchar();
-        } else if (currChar == '[') { // Start of a loop
-            continue;
-        } else if (currChar == ']' && *dataPtr) { // End of a loop
-            loop = 1;
-            while (loop > 0) {
-                currChar = code[--index];
-                if (currChar == '[') {
-                    loop--;
-                } else if (currChar == ']') {
-                    loop++;
-                }
-            }
-        }
-    }
+    char *code;
+    while ((scanf("%s", code)))
 }
