@@ -34,7 +34,7 @@
 #include <string.h>
 
 // Inspired from the Python REPL
-void interactiveMode(char *dataPtr, bool verbose)
+void braf_interactiveMode(char *dataPtr, bool verbose)
 {
     braf_displayInfo();
     printf("Type 'Exit' or press Ctrl+C to exit braf.\n")

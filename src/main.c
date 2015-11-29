@@ -28,22 +28,44 @@
  * SOFTWARE.
  */
 #include <stdio.h>
+#include <unistd.h>
 
 #include "braf.h"
 #include "interactive_mode.h"
 #include "util.h"
 
-int main(void)
+int main(int argc, char *argv[])
 {
     char tape[30000] = {0};
     char *tapePtr = tape;
     char *code = NULL;
-    printf("Braf - a brainfuck interpreter\n");
-    printf("Input the code:\n");
-    fgets(code, 100, stdin);
-    printf("\nOutput:");
-    braf_interpretCode(code, tapePtr);
-    printf("\n");
+
+    // Check if there is an invalid argument
+    bool verbose = false;
+    if (argc > 1) {
+        for (int argIndex = 1; argIndex < argc; argIndex++) {
+            char *currArg = argv[argIndex];
+            if (*currArg[0] == '-') { // Argument is a flag
+                if (strcmp(*currArg, "-h") != 0 || strcmp(*currArg, "--help") != 0 ||
+                    strcmp(*currArg, "-v") != 0 || strcmp(*currArg, "--version") != 0 ||
+                    strcmp(*currArg, "-i") != 0 || strcmp(*currArg, "--interactive") != 0 ||
+                    strcmp(*currArg, "-d") != 0 || strcmp(*currArg, "--debug") != 0 ||
+                    strcmp(*currArg, "--verbose") != 0)) {
+                    braf_displayErrorInArguments("unknown arguments: ", currArg);
+
+                    return 1;
+                }
+            } else { // Argument is probably a file
+                if (!braf_fileExists(*currArg)) {
+                    braf_displayErrorInArguments("file does not exist: ", currArg);
+
+                    return 1;
+                }
+            }
+        }
+    }
+
+    //
 
     return 0;
 }

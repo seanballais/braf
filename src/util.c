@@ -32,12 +32,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #define CAPACITY 128
 
-void braf_displayError(char *msg, int col = 0, int rw = 0)
+void braf_displayError(char *msg)
 {
-    printf("Error at line %d, column %d: %s\n", rw, col, msg);
+    printf("braf: error: %s\n", msg);
+}
+
+void braf_displayErrorInArguments(char *msg, char *arg)
+{
+    strcat(msg, "'");
+    strcat(msg, arg);
+    strcat(msg, "'");
+
+    braf_displayError(msg);
+}
+
+void braf_displayErrorInInterpreter(char *msg, int col = 0, int rw = 0)
+{
+    printf("braf: error at line %d, column %d: %s\n", rw, col, msg);
 }
 
 void braf_displayHelp(void)
@@ -45,12 +60,13 @@ void braf_displayHelp(void)
     printf("braf - a Brainfuck interpreter\n");
     printf("Usage: braf [options] <input files>\n");
     printf("Options:\n");
-    printf("\t-h\tDisplay this help text\n");
-    printf("\t-v\tDisplay braf version\n")
-    printf("\t-i\tExplicitly enable interactive mode.\n");
-    printf("\t\tInteractive mode can be initialized by not including any flags.\n");
-    printf("\t-d\tEnable debug mode. braf will display the values of the modified cells.\n");
-    printf("NOTE: braf will accept any text file (.c, .txt, .ini) and will treat them as if containing Brainfuck code.\n");
+    printf("\t-h --help\tDisplay this help text\n");
+    printf("\t-v --version\tDisplay braf version and additional information.\n")
+    printf("\t-i --interactive\tExplicitly enable interactive mode.\n");
+    printf("\t\t\tInteractive mode can be initialized by not including any flags.\n");
+    printf("\t-d --debug\tEnable debug mode. braf will display the values of the modified cells, and any performed operations.\n");
+    printf("\t   --verbose\n");
+    printf("NOTE: braf will accept any text file (.c, .txt, .ini) and will treat them as if they contain Brainfuck code, as long as the text file has a file extension.\n");
 }
 
 void braf_displayInfo(void)
@@ -58,6 +74,15 @@ void braf_displayInfo(void)
     printf("braf - a Brainfuck interpreter\n");
     printf("Copyright (C) 2015 Kenneth Cu, Bea Santiago, Sean Ballais, Ivan Puayap\n");
     printf("Version 0.01a\n");
+}
+
+void braf_fileExists(const char *fileName)
+{
+    if (access(fileName, R_OK) != -1) { // File exists
+        return 1;
+    } else { // File doesn't exist
+        return 0;
+    }
 }
 
 // Code slightly modified from the CS50 library
