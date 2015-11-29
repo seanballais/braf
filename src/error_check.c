@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <string.h>
 
-unsigned int braf_OverflowCheck(char *dataPtr, int col, int rw)
+unsigned int braf_OverflowCheck(const char *dataPtr, const int col, const int rw)
 {
     if (*dataPtr > 255) {
         braf_displayErrorInInterpreter("Value overflow. Cell cannot handle ASCII values greater 255.", col, row);
@@ -43,7 +43,7 @@ unsigned int braf_OverflowCheck(char *dataPtr, int col, int rw)
     return 0;
 }
 
-unsigned int braf_valUnderflowCheck(char *dataPtr, int col, int rw)
+unsigned int braf_valUnderflowCheck(const char *dataPtr, const int col, const int rw)
 {
     if (*dataPtr < 0) {
         braf_displayErrorInInterpreter("Value underflow. Cell cannot handle ASCII values less than 0.", col, row);
@@ -53,7 +53,7 @@ unsigned int braf_valUnderflowCheck(char *dataPtr, int col, int rw)
     return 0;
 }
 
-unsigned int braf_tapeOverflowCheck(int currIndex, int col, int rw)
+unsigned int braf_tapeOverflowCheck(const int currIndex, const int col, const int rw)
 {
     if (currIndex < 1 || currIndex > 30000) {
         char *msg = "Attempting to access non-existent Cell #";

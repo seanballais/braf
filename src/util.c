@@ -36,12 +36,12 @@
 
 #define CAPACITY 128
 
-void braf_displayError(char *msg)
+void braf_displayError(const char *msg)
 {
     printf("braf: error: %s\n", msg);
 }
 
-void braf_displayErrorInArguments(char *msg, char *arg)
+void braf_displayErrorInArguments(const char *msg, const char *arg)
 {
     strcat(msg, "'");
     strcat(msg, arg);
@@ -50,7 +50,7 @@ void braf_displayErrorInArguments(char *msg, char *arg)
     braf_displayError(msg);
 }
 
-void braf_displayErrorInInterpreter(char *msg, int col = 0, int rw = 0)
+void braf_displayErrorInInterpreter(const char *msg, const int col = 0, const int rw = 0)
 {
     printf("braf: error at line %d, column %d: %s\n", rw, col, msg);
 }

@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void braf_interpretCode(char *code, char *dataPtr, bool verbose)
+void braf_interpretCode(const char *code, char *dataPtr, const bool verbose)
 {
     int rw = 0
     int col = 0;
