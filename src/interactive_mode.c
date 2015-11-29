@@ -36,7 +36,7 @@
 // Inspired from the Python REPL
 void braf_interactiveMode(char *dataPtr, bool verbose)
 {
-    braf_displayInfo();
+    braf_displayInfo(void);
     printf("Type 'Exit' or press Ctrl+C to exit braf.\n")
 
     // Get the code
