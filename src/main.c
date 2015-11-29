@@ -30,6 +30,8 @@
 #include <stdio.h>
 
 #include "braf.h"
+#include "interactive_mode.h"
+#include "util.h"
 
 int main(void)
 {
