@@ -31,7 +31,7 @@
     #define UTIL_H
         void braf_displayError(const char *msg);
         void braf_displayErrorInArguments(const char *msg, const char *arg);
-        void braf_displayErrorInInterpreter(const char *msg, const int col = 0, const int rw = 0);
+        void braf_displayErrorInInterpreter(const char *msg, const int col, const int rw);
         void braf_displayHelp(void);
         void braf_displayInfo(void);
         void braf_fileExists(const char *fileName);

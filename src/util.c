@@ -51,7 +51,7 @@ void braf_displayErrorInArguments(const char *msg, const char *arg)
     braf_displayError(msg);
 }
 
-void braf_displayErrorInInterpreter(const char *msg, const int col = 0, const int rw = 0)
+void braf_displayErrorInInterpreter(const char *msg, const int col, const int rw)
 {
     printf("braf: error at line %d, column %d: %s\n", rw, col, msg);
 }
