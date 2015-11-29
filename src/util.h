@@ -34,6 +34,6 @@
         void braf_displayErrorInInterpreter(const char *msg, const int col, const int rw);
         void braf_displayHelp(void);
         void braf_displayInfo(void);
-        void braf_fileExists(const char *fileName);
+        unsigned int braf_fileExists(const char *fileName);
         void cs50_GetString(void);
 #endif

@@ -78,7 +78,7 @@ void braf_displayInfo(void)
     printf("Version 0.01a\n");
 }
 
-void braf_fileExists(const char *fileName)
+unsigned int braf_fileExists(const char *fileName)
 {
     if (access(fileName, R_OK) != -1) { // File exists
         return 1;
