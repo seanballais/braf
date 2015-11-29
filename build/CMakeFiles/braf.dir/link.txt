@@ -1,1 +1,0 @@
-/usr/bin/clang   -std=c11 -O3    CMakeFiles/braf.dir/src/main.c.o CMakeFiles/braf.dir/src/interactive_mode.c.o  -o braf -rdynamic -llibbraf 
