@@ -31,6 +31,7 @@
 #include "util.h"
 
 #include <stdio.h>
+#include <string.h>
 
 unsigned int braf_OverflowCheck(char *dataPtr, int col, int rw)
 {
@@ -54,8 +55,12 @@ unsigned int braf_valUnderflowCheck(char *dataPtr, int col, int rw)
 
 unsigned int braf_tapeOverflowCheck(int currIndex, int col, int rw)
 {
-    if (currIndex < 0 || currIndex > 30000) {
-        braf_displayError("Attempting to accessing a non-existent cell. Accessible cells are cells 1 to 30,000.");
+    if (currIndex < 1 || currIndex > 30000) {
+        char *msg = "Attempting to access non-existent Cell #";
+        strcat(msg, currIndex);
+        strcat(msg, ". Accessible cells range from Cell #1 to Cell #30,000.")
+
+        braf_displayError(msg, col, rw);
         return 1;
     }
 

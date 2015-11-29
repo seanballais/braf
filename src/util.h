@@ -30,4 +30,6 @@
 #ifndef UTIL_H
     #define UTIL_H
         void braf_displayError(char *msg, int col = 0, int rw = 0);
+        void braf_displayHelp();
+        void braf_displayVersion();
 #endif
