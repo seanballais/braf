@@ -46,20 +46,20 @@ int main(int argc, char *argv[])
         for (int argIndex = 1; argIndex < argc; argIndex++) {
             char *currArg = argv[argIndex];
             if (*currArg[0] == '-') { // Argument is a flag
-                if (strcmp(*currArg, "-h") != 0 || strcmp(*currArg, "--help") != 0 ||
-                    strcmp(*currArg, "-v") != 0 || strcmp(*currArg, "--version") != 0 ||
-                    strcmp(*currArg, "-i") != 0 || strcmp(*currArg, "--interactive") != 0 ||
-                    strcmp(*currArg, "-d") != 0 || strcmp(*currArg, "--debug") != 0 ||
-                    strcmp(*currArg, "--verbose") != 0)) {
+                if (strcmp(currArg, "-h") != 0 || strcmp(currArg, "--help") != 0 ||
+                    strcmp(currArg, "-v") != 0 || strcmp(currArg, "--version") != 0 ||
+                    strcmp(currArg, "-i") != 0 || strcmp(currArg, "--interactive") != 0 ||
+                    strcmp(currArg, "-d") != 0 || strcmp(currArg, "--debug") != 0 ||
+                    strcmp(currArg, "--verbose") != 0)) {
                     braf_displayErrorInArguments("unknown arguments: ", currArg);
 
                     return 1;
                 } else if (strcmp(currArg, "-d") == 0 || strcmp(currArg, "--debug") == 0 ||
-                           strcmp(*currArg, "--verbose") == 0)) {
+                           strcmp(currArg, "--verbose") == 0)) {
                     verbose = true;
                 }
             } else { // Argument is probably a file
-                if (!braf_fileExists(*currArg)) {
+                if (!braf_fileExists(currArg)) {
                     braf_displayErrorInArguments("file does not exist: ", currArg);
 
                     return 1;

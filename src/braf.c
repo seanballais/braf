@@ -50,7 +50,7 @@ void braf_interpretCode(char *code, char *dataPtr, bool verbose)
                 (*dataPtr)++;
             }
 
-            chkResults = braf_valOverflowCheck(*dataPtr, col, rw)
+            chkResults = braf_valOverflowCheck(dataPtr, col, rw)
             if (chkResults) {
                 return 1;
             }
@@ -61,7 +61,7 @@ void braf_interpretCode(char *code, char *dataPtr, bool verbose)
                 (*dataPtr)--;
             }
 
-            chkResults = braf_valUnderflowCheck(*dataPtr, col, rw)
+            chkResults = braf_valUnderflowCheck(dataPtr, col, rw)
             if (chkResults) {
                 return 1;
             }
