@@ -79,12 +79,12 @@ int main(int argc, char *argv[])
             char *currArg = argv[argIndex];
             if (strcmp(currArg, "-h") == 0 || strcmp(currArg, "--help") == 0) {
                 if (!helpDisplayed) {
-                    braf_displayHelp(void);
+                    braf_displayHelp();
                     helpDisplayed = true;
                 }
             } else if (strcmp(currArg, "-v") == 0 || strcmp(currArg, "--version") == 0) {
                 if (!versionDisplayed) {
-                    braf_displayInfo(void);
+                    braf_displayInfo();
                     versionDisplayed = true;
                 }
             } else if (strcmp(currArg, "-i") == 0 || strcmp(currArg, "--interactive") == 0) {
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
                 }
             } else { // Handle the files
                 char *code;
-                int currChar = 0;
+                char currChar = 0;
                 FILE *file = fopen(currArg, "r");
                 if (file) {
                     while ((currChar = getc(file)) != EOF) {
