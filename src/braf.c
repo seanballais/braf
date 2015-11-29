@@ -28,24 +28,51 @@
  * SOFTWARE.
  */
 #include "braf.h"
+#include "error_check.h"
 
 #include <stdio.h>
 #include <string.h>
 
-void braf_interpretCode(char *code, char *dataPtr)
+unsigned braf_interpretCode(char *code, char *dataPtr)
 {
-    char currChar = '\0';
+    int rw = 0
+    int col = 0;
     int loop = 0;
+    unsigned int chkResults = 0;
+    char currChar = '\0';
+    int tapeIndex = 1;
     for (int index = 0; code[index] != '\0'; index++) {
         currChar = code[index];
         if (currChar == '+') { // Increment the value in the pointer by 1
             (*dataPtr)++;
+
+            chkResults = braf_valOverflowCheck(*dataPtr, col, rw)
+            if (chkResults) {
+                return 1;
+            }
         } else if (currChar == '-') { // Decrement the value in the pointer by 1
             (*dataPtr)--;
+
+            chkResults = braf_valUnderflowCheck(*dataPtr, col, rw)
+            if (chkResults) {
+                return 1;
+            }
         } else if (currChar == '<') { // Move one step back in the tape
             dataPtr--;
+            tapeIndex--;
+
+            chkResults = braf_tapeAccessCheck(tapeIndex, col, rw);
+            if (chkResults) {
+                return 1;
+            }
         } else if (currChar == '>') { // Move one step forward in the tape
             dataPtr++;
+            tapeIndex++;
+
+            chkResults = braf_tapeAccessCheck(tapeIndex, col, rw);
+            if (chkResults) {
+                return 1;
+            }
         } else if (currChar == '.') { // Output the data
             putchar(*dataPtr);
         } else if (currChar == ',') { // Input data
@@ -62,6 +89,11 @@ void braf_interpretCode(char *code, char *dataPtr)
                     loop++;
                 }
             }
+        } else if (currChar == '\n') {
+            col = 0;
+            rw++;
         }
+
+        col++;
     }
 }

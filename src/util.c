@@ -27,7 +27,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef BRAF_H
-    #define BRAF_H
-        unsigned int braf_interpretCode(char *code, char *dataPtr);
-#endif
+#include "util.h"
+
+#include <stdio.h>
+
+void braf_displayError(char *msg, int col = 0, int rw = 0)
+{
+    printf("Error at line %d, column %d: %s\n", rw, col, msg);
+}

@@ -27,7 +27,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef BRAF_H
-    #define BRAF_H
-        unsigned int braf_interpretCode(char *code, char *dataPtr);
+#ifndef ERROR_CHECK_H
+    #define ERROR_CHECK_H
+        unsigned int braf_valOverflowCheck(char *dataPtr, int col, int rw);
+        unsigned int braf_valUnderflowCheck(char *dataPtr, int col, int rw);
+        unsigned int braf_tapeAccessCheck(int currIndex, int col, int rw);
 #endif

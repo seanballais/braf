@@ -27,7 +27,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef BRAF_H
-    #define BRAF_H
-        unsigned int braf_interpretCode(char *code, char *dataPtr);
-#endif
+#include "error_check.h"
+#include "util.h"
+
+#include <stdio.h>
+
+unsigned int braf_OverflowCheck(char *dataPtr, int col, int rw)
+{
+    if (*dataPtr > 255) {
+        braf_displayError("Value overflow. Cell cannot handle ASCII values greater 255.", col, row);
+        return 1;
+    }
+
+    return 0;
+}
+
+unsigned int braf_valUnderflowCheck(char *dataPtr, int col, int rw)
+{
+    if (*dataPtr < 0) {
+        braf_displayError("Value underflow. Cell cannot handle ASCII values less than 0.", col, row);
+        return 1;
+    }
+
+    return 0;
+}
+
+unsigned int braf_tapeOverflowCheck(int currIndex, int col, int rw)
+{
+    if (currIndex < 0 || currIndex > 30000) {
+        braf_displayError("Attempting to accessing a non-existent cell. Accessible cells are cells 1 to 30,000.");
+        return 1;
+    }
+
+    return 0;
+}

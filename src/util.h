@@ -27,7 +27,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef BRAF_H
-    #define BRAF_H
-        unsigned int braf_interpretCode(char *code, char *dataPtr);
+#ifndef UTIL_H
+    #define UTIL_H
+        void braf_displayError(char *msg, int col = 0, int rw = 0);
 #endif

@@ -35,5 +35,7 @@
 int interactiveMode(char *dataPtr)
 {
     char *code;
-    while ((scanf("%s", code)))
+    while ((scanf("%s", code)) != EOF) {
+        
+    }
 }
