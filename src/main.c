@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
                 FILE *file = fopen(currArg, "r");
                 if (file) {
                     while ((currChar = getc(file)) != EOF) {
-                        strcat(code, currChar);
+                        strcat(code, &currChar);
                     }
 
                     fclose(file);

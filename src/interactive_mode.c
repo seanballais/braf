@@ -27,6 +27,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include "braf.h"
 #include "interactive_mode.h"
 #include "util.h"
 
@@ -37,15 +38,15 @@
 // Inspired from the Python REPL
 void braf_interactiveMode(char *dataPtr, const bool verbose)
 {
-    braf_displayInfo(void);
-    printf("Type 'Exit' or press Ctrl+C to exit braf.\n")
+    braf_displayInfo();
+    printf("Type 'Exit' or press Ctrl+C to exit braf.\n");
 
     // Get the code
     char codeChar;
     char *code;
     do {
         printf("\n>>> ");
-        *code = cs50_GetString();
-        braf_interpretCode(*code, *dataPtr, verbose);
-    } while (strcmp(code, "Exit") != 0)
+        code = cs50_GetString();
+        braf_interpretCode(code, dataPtr, verbose);
+    } while (strcmp(code, "Exit") != 0);
 }
