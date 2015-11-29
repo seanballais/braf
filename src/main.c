@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     if (argc > 1) {
         for (int argIndex = 1; argIndex < argc; argIndex++) {
             char *currArg = argv[argIndex];
-            if (*currArg[0] == '-') { // Argument is a flag
+            if (currArg[0] == '-') { // Argument is a flag
                 if (strcmp(currArg, "-h") != 0 || strcmp(currArg, "--help") != 0 ||
                     strcmp(currArg, "-v") != 0 || strcmp(currArg, "--version") != 0 ||
                     strcmp(currArg, "-i") != 0 || strcmp(currArg, "--interactive") != 0 ||
