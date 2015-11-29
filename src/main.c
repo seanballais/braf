@@ -54,6 +54,9 @@ int main(int argc, char *argv[])
                     braf_displayErrorInArguments("unknown arguments: ", currArg);
 
                     return 1;
+                } else if (strcmp(currArg, "-d") == 0 || strcmp(currArg, "--debug") == 0 ||
+                           strcmp(*currArg, "--verbose") == 0)) {
+                    verbose = true;
                 }
             } else { // Argument is probably a file
                 if (!braf_fileExists(*currArg)) {
@@ -65,7 +68,44 @@ int main(int argc, char *argv[])
         }
     }
 
-    //
+    // Execute the flags
+    if (argc > 1) {
+        bool helpDisplayed = false;
+        bool versionDisplayed = false;
+        bool interactiveDone = false;
+        for (int argIndex = 1; argIndex < argc; argIndex++) {
+            char *currArg = argv[argIndex];
+            if (strcmp(currArg, "-h") == 0 || strcmp(currArg, "--help") == 0) {
+                if (!helpDisplayed) {
+                    braf_displayHelp(void);
+                    helpDisplayed = true;
+                }
+            } else if (strcmp(currArg, "-v") == 0 || strcmp(currArg, "--version") == 0) {
+                if (!versionDisplayed) {
+                    braf_displayInfo(void);
+                    versionDisplayed = true;
+                }
+            } else if (strcmp(currArg, "-i") == 0 || strcmp(currArg, "--interactive") == 0) {
+                if (!interactiveDone) {
+                    braf_interactiveMode(dataPtr, verbose);
+                    interactiveDone = true;
+                }
+            } else { // Handle the files
+                char *code;
+                int currChar = 0;
+                FILE *file = fopen(currArg, "r");
+                if (file) {
+                    while ((currChar = getc(file)) != EOF) {
+                        strcat(code, currChar);
+                    }
+
+                    fclose(file);
+                }
+
+                braf_interpretCode(code, tapePtr, verbose);
+            }
+        }
+    }
 
     return 0;
 }
