@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
                     return 1;
                 } else if (strcmp(currArg, "-d") == 0 || strcmp(currArg, "--debug") == 0 ||
-                           strcmp(currArg, "--verbose") == 0)) {
+                           strcmp(currArg, "--verbose") == 0) {
                     verbose = true;
                 }
             } else { // Argument is probably a file
