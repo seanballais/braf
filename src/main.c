@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
                     strcmp(currArg, "-v") != 0 || strcmp(currArg, "--version") != 0 ||
                     strcmp(currArg, "-i") != 0 || strcmp(currArg, "--interactive") != 0 ||
                     strcmp(currArg, "-d") != 0 || strcmp(currArg, "--debug") != 0 ||
-                    strcmp(currArg, "--verbose") != 0)) {
+                    strcmp(currArg, "--verbose") != 0) {
                     braf_displayErrorInArguments("unknown arguments: ", currArg);
 
                     return 1;
