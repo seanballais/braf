@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
                 }
             } else if (strcmp(currArg, "-i") == 0 || strcmp(currArg, "--interactive") == 0) {
                 if (!interactiveDone) {
-                    braf_interactiveMode(dataPtr, verbose);
+                    braf_interactiveMode(tapePtr, verbose);
                     interactiveDone = true;
                 }
             } else { // Handle the files
