@@ -36,7 +36,7 @@
 unsigned int braf_OverflowCheck(char *dataPtr, int col, int rw)
 {
     if (*dataPtr > 255) {
-        braf_displayError("Value overflow. Cell cannot handle ASCII values greater 255.", col, row);
+        braf_displayErrorInInterpreter("Value overflow. Cell cannot handle ASCII values greater 255.", col, row);
         return 1;
     }
 
@@ -46,7 +46,7 @@ unsigned int braf_OverflowCheck(char *dataPtr, int col, int rw)
 unsigned int braf_valUnderflowCheck(char *dataPtr, int col, int rw)
 {
     if (*dataPtr < 0) {
-        braf_displayError("Value underflow. Cell cannot handle ASCII values less than 0.", col, row);
+        braf_displayErrorInInterpreter("Value underflow. Cell cannot handle ASCII values less than 0.", col, row);
         return 1;
     }
 
@@ -60,7 +60,7 @@ unsigned int braf_tapeOverflowCheck(int currIndex, int col, int rw)
         strcat(msg, currIndex);
         strcat(msg, ". Accessible cells range from Cell #1 to Cell #30,000.")
 
-        braf_displayError(msg, col, rw);
+        braf_displayErrorInInterpreter(msg, col, rw);
         return 1;
     }
 
