@@ -31,6 +31,6 @@
     #define UTIL_H
         void braf_displayError(char *msg, int col = 0, int rw = 0);
         void braf_displayHelp(void);
-        void braf_displayVersion(void);
+        void braf_displayInfo(void);
         void cs50_GetString(void);
 #endif

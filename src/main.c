@@ -35,7 +35,7 @@ int main(void)
 {
     char tape[30000] = {0};
     char *tapePtr = tape;
-    string code = NULL;
+    char *code = NULL;
     printf("Braf - a brainfuck interpreter\n");
     printf("Input the code:\n");
     fgets(code, 100, stdin);

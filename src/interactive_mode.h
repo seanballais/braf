@@ -29,5 +29,5 @@
  */
 #ifndef INTERACTIVE_MODE_H
     #define INTERACTIVE_MODE_H
-        int interactiveMode(char *dataPtr);
+        void interactiveMode(char *dataPtr);
 #endif

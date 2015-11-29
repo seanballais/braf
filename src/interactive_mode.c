@@ -28,14 +28,23 @@
  * SOFTWARE.
  */
 #include "interactive_mode.h"
+#include "util.h"
 
 #include <stdio.h>
 #include <string.h>
 
-int interactiveMode(char *dataPtr)
+// Inspired from the Python REPL
+void interactiveMode(char *dataPtr, bool verbose)
 {
+    braf_displayInfo();
+    printf("Type 'Exit' or press Ctrl+C to exit braf.\n")
+
+    // Get the code
+    char codeChar;
     char *code;
-    while ((scanf("%s", code)) != EOF) {
-        
-    }
+    do {
+        printf("\n>>> ");
+        *code = cs50_GetString();
+        braf_interpretCode(*code, *dataPtr, verbose);
+    } while (strcmp(code, "Exit") != 0)
 }

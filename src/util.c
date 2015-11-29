@@ -53,7 +53,7 @@ void braf_displayHelp(void)
     printf("NOTE: braf will accept any text file (.c, .txt, .ini) and will treat them as if containing Brainfuck code.\n");
 }
 
-void braf_displayVersion(void)
+void braf_displayInfo(void)
 {
     printf("braf - a Brainfuck interpreter\n");
     printf("Copyright (C) 2015 Kenneth Cu, Bea Santiago, Sean Ballais, Ivan Puayap\n");
