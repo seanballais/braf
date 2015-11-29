@@ -35,3 +35,15 @@ void braf_displayError(char *msg, int col = 0, int rw = 0)
 {
     printf("Error at line %d, column %d: %s\n", rw, col, msg);
 }
+
+void braf_displayHelp()
+{
+    printf("braf - a ");
+}
+
+void braf_displayVersion()
+{
+    printf("braf - a Brainfuck interpreter\n");
+    printf("Copyright (C) 2015 Kenneth Cu, Bea Santiago, Sean Ballais, Ivan Puayap\n");
+    printf("Version 0.01a\n");
+}
