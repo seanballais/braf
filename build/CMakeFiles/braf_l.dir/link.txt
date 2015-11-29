@@ -1,0 +1,2 @@
+/usr/bin/ar cr libbraf_l.a  CMakeFiles/braf_l.dir/src/braf.c.o CMakeFiles/braf_l.dir/src/error_check.c.o CMakeFiles/braf_l.dir/src/util.c.o
+/usr/bin/ranlib libbraf_l.a

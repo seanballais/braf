@@ -32,6 +32,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 // Inspired from the Python REPL
 void braf_interactiveMode(char *dataPtr, const bool verbose)

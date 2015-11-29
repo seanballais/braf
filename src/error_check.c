@@ -32,6 +32,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 unsigned int braf_OverflowCheck(const char *dataPtr, const int col, const int rw)
 {

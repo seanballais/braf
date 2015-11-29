@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/braf.h
+
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/interactive_mode.c
+interactive_mode.h
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/interactive_mode.h
+util.h
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/util.h
+stdio.h
+-
+string.h
+-
+
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/interactive_mode.h
+
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/main.c
+stdio.h
+-
+unistd.h
+-
+braf.h
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/braf.h
+interactive_mode.h
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/interactive_mode.h
+util.h
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/util.h
+
+/home/seanballais/School/UPVTC/CMSC11/Final Project/braf/src/util.h
+

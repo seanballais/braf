@@ -29,6 +29,7 @@
  */
 #include <stdio.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 #include "braf.h"
 #include "interactive_mode.h"

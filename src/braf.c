@@ -32,6 +32,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 void braf_interpretCode(const char *code, char *dataPtr, const bool verbose)
 {
