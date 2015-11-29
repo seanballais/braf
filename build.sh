@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # braf - Brainfuck interpreter
 # Developed by:
 #     - Bea Santiago (<>)
