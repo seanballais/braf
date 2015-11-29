@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <string.h>
 
-unsigned braf_interpretCode(char *code, char *dataPtr)
+unsigned int braf_interpretCode(char *code, char *dataPtr, bool verbose)
 {
     int rw = 0
     int col = 0;
@@ -44,30 +44,46 @@ unsigned braf_interpretCode(char *code, char *dataPtr)
     for (int index = 0; code[index] != '\0'; index++) {
         currChar = code[index];
         if (currChar == '+') { // Increment the value in the pointer by 1
-            (*dataPtr)++;
+            if (verbose) {
+                printf("Cell #%d value incremented. Original Value: %c\tNew value: %c\n", tapeIndex, *dataPtr, (*dataPtr)++)
+            } else {
+                (*dataPtr)++;
+            }
 
             chkResults = braf_valOverflowCheck(*dataPtr, col, rw)
             if (chkResults) {
                 return 1;
             }
         } else if (currChar == '-') { // Decrement the value in the pointer by 1
-            (*dataPtr)--;
+            if (verbose) {
+                printf("Cell #%d value decremented. Original Value: %c\tNew value: %c\n", tapeIndex, *dataPtr, (*dataPtr)--)
+            } else {
+                (*dataPtr)--;
+            }
 
             chkResults = braf_valUnderflowCheck(*dataPtr, col, rw)
             if (chkResults) {
                 return 1;
             }
         } else if (currChar == '<') { // Move one step back in the tape
+            if (verbose) {
+                printf("Active cell changed shifted to the left. Previous active index: %d\t Current active index: %d\n", tapeIndex, tapeIndex--)
+            } else {
+                tapeIndex--;
+            }
             dataPtr--;
-            tapeIndex--;
 
             chkResults = braf_tapeAccessCheck(tapeIndex, col, rw);
             if (chkResults) {
                 return 1;
             }
         } else if (currChar == '>') { // Move one step forward in the tape
+            if (verbose) {
+                printf("Active cell changed shifted to the right. Previous active index: %d\t Current active index: %d\n", tapeIndex, tapeIndex++)
+            } else {
+                tapeIndex++;
+            }
             dataPtr++;
-            tapeIndex++;
 
             chkResults = braf_tapeAccessCheck(tapeIndex, col, rw);
             if (chkResults) {

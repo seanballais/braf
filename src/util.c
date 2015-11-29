@@ -30,20 +30,86 @@
 #include "util.h"
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define CAPACITY 128
 
 void braf_displayError(char *msg, int col = 0, int rw = 0)
 {
     printf("Error at line %d, column %d: %s\n", rw, col, msg);
 }
 
-void braf_displayHelp()
+void braf_displayHelp(void)
 {
-    printf("braf - a ");
+    printf("braf - a Brainfuck interpreter\n");
+    printf("Usage: braf [options] <input files>\n");
+    printf("Options:\n");
+    printf("\t-h\tDisplay this help text\n");
+    printf("\t-v\tDisplay braf version\n")
+    printf("\t-i\tExplicitly enable interactive mode.\n");
+    printf("\t\tInteractive mode can be initialized by not including any flags.\n");
+    printf("\t-d\tEnable debug mode. braf will display the values of the modified cells.\n");
+    printf("NOTE: braf will accept any text file (.c, .txt, .ini) and will treat them as if containing Brainfuck code.\n");
 }
 
-void braf_displayVersion()
+void braf_displayVersion(void)
 {
     printf("braf - a Brainfuck interpreter\n");
     printf("Copyright (C) 2015 Kenneth Cu, Bea Santiago, Sean Ballais, Ivan Puayap\n");
     printf("Version 0.01a\n");
+}
+
+// Code slightly modified from the CS50 library
+char* cs50_GetString(void)
+{
+    char *buffer = NULL;
+    unsigned int bufferCapacity = 0;
+    unsigned int numChar = 0;
+    int c;
+
+    // Iteratively get chars from standard input
+    while ((c = fgetc(stdin)) != '\n' && c != EOF) {
+        // Grow buffer if necessary
+        if (numChar + 1 > capacity) {
+            // Determine new capacity: start at CAPACITY then double
+            if (bufferCapacity == 0) {
+                bufferCapacity = CAPACITY;
+            } else if (bufferCapacity <= (UINT_MAX / 2)) {
+                bufferCapacity *= 2;
+            } else {
+                free(buffer);
+
+                return NULL;
+            }
+
+            // Extend buffer's capacity
+            char *tmp = realloc(buffer, capacity * sizeof(char));
+            if (tmp == NULL) {
+                free(buffer);
+
+                return NULL;
+            }
+
+            buffer = tmp;
+        }
+
+        // Append current character to buffer
+        buffer[numChar++] = c;
+    }
+
+    // Return NULL if user provided no input
+    if (numChar == 0 && c == EOF) {
+        return NULL;
+    }
+
+    // Minimize buffer
+    char *minimal = malloc((n + 1) * sizeof(char));
+    strncpy(minimal, buffer, n);
+    free(buffer);
+
+    // Terminate string
+    minimal[n] = '\0';
+
+    return minimal;
 }
