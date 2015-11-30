@@ -34,6 +34,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <limits.h>
 
 #define CAPACITY 128
 
@@ -44,9 +45,8 @@ void braf_displayError(const char *msg)
 
 void braf_displayErrorInArguments(const char *msg, const char *arg)
 {
-    strcat(msg, "'");
-    strcat(msg, arg);
-    strcat(msg, "'");
+    char *tmpMsg;
+    sprintf(tmpMsg, "%s%s", tmpMsg, arg);
 
     braf_displayError(msg);
     printf("Try 'braf --help' for more information.\n");
@@ -63,7 +63,7 @@ void braf_displayHelp(void)
     printf("Usage: braf [options] <input files>\n");
     printf("Options:\n");
     printf("\t-h --help\tDisplay this help text\n");
-    printf("\t-v --version\tDisplay braf version and additional information.\n")
+    printf("\t-v --version\tDisplay braf version and additional information.\n");
     printf("\t-i --interactive\tExplicitly enable interactive mode.\n");
     printf("\t\t\tInteractive mode can be initialized by not including any flags.\n");
     printf("\t-d, --debug\tEnable debug mode. braf will display the values of the modified cells, and any performed operations.\n");
@@ -98,7 +98,7 @@ char* cs50_GetString(void)
     // Iteratively get chars from standard input
     while ((c = fgetc(stdin)) != '\n' && c != EOF) {
         // Grow buffer if necessary
-        if (numChar + 1 > capacity) {
+        if (numChar + 1 > bufferCapacity) {
             // Determine new capacity: start at CAPACITY then double
             if (bufferCapacity == 0) {
                 bufferCapacity = CAPACITY;
