@@ -111,7 +111,7 @@ char* cs50_GetString(void)
             }
 
             // Extend buffer's capacity
-            char *tmp = realloc(buffer, capacity * sizeof(char));
+            char *tmp = realloc(buffer, bufferCapacity * sizeof(char));
             if (tmp == NULL) {
                 free(buffer);
 
@@ -126,17 +126,17 @@ char* cs50_GetString(void)
     }
 
     // Return NULL if user provided no input
-    if (numChar == 0 && c == EOF) {
+    if (numChar == 0 && numChar == EOF) {
         return NULL;
     }
 
     // Minimize buffer
-    char *minimal = malloc((n + 1) * sizeof(char));
-    strncpy(minimal, buffer, n);
+    char *minimal = malloc((numChar + 1) * sizeof(char));
+    strncpy(minimal, buffer, numChar);
     free(buffer);
 
     // Terminate string
-    minimal[n] = '\0';
+    minimal[numChar] = '\0';
 
     return minimal;
 }

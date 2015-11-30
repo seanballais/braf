@@ -31,5 +31,5 @@
     #define BRAF_H
         #include <stdbool.h>
 
-        void braf_interpretCode(const char *code, char *dataPtr, const bool verbose);
+        unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verbose);
 #endif
