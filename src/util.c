@@ -40,7 +40,6 @@ void braf_displayHelp(void)
     printf("\t-i --interactive\tExplicitly enable interactive mode.\n");
     printf("\t\t\t\tInteractive mode can be initialized by not including any flags.\n");
     printf("\t-d, --debug, --verbose\t\tEnable debug mode. braf will display the values of the modified cells, and any performed operations.\n");
-    printf("\nNOTE: braf will accept any text file (.c, .txt, .ini) and will treat them as if they contain Brainfuck code. It cannot handle binary files.\n");
 }
 
 void braf_displayInfo(void)
