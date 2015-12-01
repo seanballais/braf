@@ -45,7 +45,8 @@ void braf_displayError(const char *msg)
 
 void braf_displayErrorInArguments(const char *msg, const char *arg)
 {
-    char tmpMsg[256];
+    int msgLen = strlen(msg);
+    char tmpMsg[msgLen];
     strcpy(tmpMsg, msg);
     strcat(tmpMsg, arg);
 
@@ -63,13 +64,13 @@ void braf_displayHelp(void)
     printf("braf - a Brainfuck interpreter\n");
     printf("Usage: braf [options] <input files>\n");
     printf("Options:\n");
-    printf("\t-h --help\tDisplay this help text\n");
-    printf("\t-v --version\tDisplay braf version and additional information.\n");
+    printf("\t-h --help\t\tDisplay this help text\n");
+    printf("\t-v --version\t\tDisplay braf version and additional information.\n");
     printf("\t-i --interactive\tExplicitly enable interactive mode.\n");
-    printf("\t\t\tInteractive mode can be initialized by not including any flags.\n");
-    printf("\t-d, --debug\tEnable debug mode. braf will display the values of the modified cells, and any performed operations.\n");
+    printf("\t\t\t\tInteractive mode can be initialized by not including any flags.\n");
+    printf("\t-d, --debug\t\tEnable debug mode. braf will display the values of the modified cells, and any performed operations.\n");
     printf("\t    --verbose\n");
-    printf("NOTE: braf will accept any text file (.c, .txt, .ini) and will treat them as if they contain Brainfuck code, as long as the text file has a file extension.\n");
+    printf("\nNOTE: braf will accept any text file (.c, .txt, .ini) and will treat them as if they contain Brainfuck code. It cannot handle binary files.\n");
 }
 
 void braf_displayInfo(void)

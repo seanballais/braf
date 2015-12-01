@@ -31,6 +31,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "braf.h"
 #include "interactive_mode.h"
@@ -42,70 +43,68 @@ int main(int argc, char *argv[])
     char *tapePtr = tape;
     char *code = NULL;
 
-    // Check if there is an invalid argument
+    // Handle the arguments
     bool verbose = false;
-    if (argc > 1) {
-        for (int argIndex = 1; argIndex < argc; argIndex++) {
-            char currArg[256];
-            strcpy(currArg, argv[argIndex]);
-            printf("We're good here. Current argument: %s\n", currArg);
-            if (strcmp(currArg, "-h") != 0 || strcmp(currArg, "--help") != 0 ||
-                strcmp(currArg, "-v") != 0 || strcmp(currArg, "--version") != 0 ||
-                strcmp(currArg, "-i") != 0 || strcmp(currArg, "--interactive") != 0 ||
-                strcmp(currArg, "-d") != 0 || strcmp(currArg, "--debug") != 0 ||
-                strcmp(currArg, "--verbose") != 0) { // Argument is a flag
-                braf_displayErrorInArguments("unknown arguments: ", currArg);
-
-                return 1;
-            } else { // Argument is probably a file
-                if (!braf_fileExists(currArg)) {
-                    braf_displayErrorInArguments("file does not exist: ", currArg);
-
-                    return 1;
-                }
-            }
-        }
-    }
-
-    // Execute the flags
     if (argc > 1) {
         bool helpDisplayed = false;
         bool versionDisplayed = false;
         bool interactiveDone = false;
         for (int argIndex = 1; argIndex < argc; argIndex++) {
-            char *currArg = argv[argIndex];
-            if (strcmp(currArg, "-h") == 0 || strcmp(currArg, "--help") == 0) {
-                if (!helpDisplayed) {
-                    braf_displayHelp();
-                    helpDisplayed = true;
-                }
-            } else if (strcmp(currArg, "-v") == 0 || strcmp(currArg, "--version") == 0) {
-                if (!versionDisplayed) {
-                    braf_displayInfo();
-                    versionDisplayed = true;
-                }
-            } else if (strcmp(currArg, "-i") == 0 || strcmp(currArg, "--interactive") == 0) {
-                if (!interactiveDone) {
-                    braf_interactiveMode(tapePtr, verbose);
-                    interactiveDone = true;
-                }
-            } else if (strcmp(currArg, "-d") == 0 || strcmp(currArg, "--debug") == 0 ||
-                       strcmp(currArg, "--verbose") == 0) {
-                if (verbose) {
-                    verbose = false;
-                } else if (!verbose) {
-                    verbose = true;
+            int argLen = strlen(argv[argIndex]);
+            char currArg[argLen];
+            strcpy(currArg, argv[argIndex]);
+            if (currArg[0] == '-') { // Handle the flags
+                if (strcmp(currArg, "-h") == 0 || strcmp(currArg, "--help") == 0) {
+                    if (!helpDisplayed) {
+                        braf_displayHelp();
+                        helpDisplayed = true;
+                    }
+                } else if (strcmp(currArg, "-v") == 0 || strcmp(currArg, "--version") == 0) {
+                    if (!versionDisplayed) {
+                        braf_displayInfo();
+                        versionDisplayed = true;
+                    }
+                } else if (strcmp(currArg, "-i") == 0 || strcmp(currArg, "--interactive") == 0) {
+                    if (!interactiveDone) {
+                        braf_interactiveMode(tapePtr, verbose);
+                        interactiveDone = true;
+                    }
+                } else if (strcmp(currArg, "-d") == 0 || strcmp(currArg, "--debug") == 0 ||
+                           strcmp(currArg, "--verbose") == 0) {
+                    if (verbose) {
+                        verbose = false;
+                    } else if (!verbose) {
+                        verbose = true;
+                    }
+                } else {
+                    braf_displayErrorInArguments("unknown arguments: ", currArg);
+
+                    return 1;
                 }
             } else { // Handle the files
-                char *code;
+                char *code = NULL;
                 char currChar = 0;
                 FILE *file = fopen(currArg, "r");
                 if (file) {
+                    int charIndex = 0;
                     while ((currChar = getc(file)) != EOF) {
-                        strcat(code, &currChar);
+                        code = realloc(code, sizeof(char) * (charIndex + 1));
+                        if (!code) {
+                            free(code);
+                            code = NULL;
+
+                            braf_displayError("Code parsing error. Error while allocating memory for the code to be interpreted. Memory might not be enough.");
+                            return 1;
+                        }
+
+                        code[charIndex++] = currChar;
                     }
 
                     fclose(file);
+                } else {
+                    braf_displayErrorInArguments("file does not exist: ", currArg);
+
+                    return 1;
                 }
 
                 braf_interpretCode(code, tapePtr, verbose);
