@@ -31,10 +31,8 @@ unsigned int braf_valUnderflowCheck(const char *dataPtr, const int col, const in
 unsigned int braf_tapeAccessCheck(const int currIndex, const int col, const int rw)
 {
     if (currIndex < 1 || currIndex > 30000) {
-        char *msg = NULL;
-        strcat(msg, "Attempting to access non-existent Cell #");
-        strcat(msg, braf_toString(currIndex));
-        strcat(msg, ". Accessible cells range from Cell #1 to Cell #30,000.");
+        char msg[105];
+        sprintf(msg,  "Attempting to access non-existent Cell #%d. Accessible cells range from Cell #1 to Cell #30000.", currIndex);
 
         braf_displayErrorInInterpreter(msg, col, rw);
         return 1;

@@ -17,7 +17,7 @@ void braf_displayError(const char *msg)
 void braf_displayErrorInArguments(const char *msg, const char *arg)
 {
     int msgLen = strlen(msg);
-    char tmpMsg[msgLen];
+    char tmpMsg[msgLen + 1];
     strcpy(tmpMsg, msg);
     strcat(tmpMsg, arg);
 
@@ -56,27 +56,6 @@ unsigned int braf_fileExists(const char *fileName)
     } else { // File doesn't exist
         return 0;
     }
-}
-
-char* braf_toString(int num)
-{
-    char *retStr;
-
-    int rem;
-    int len = 0;
-    int n = num;
-    while (n != 0) {
-        len++;
-        n /= 10;
-    }
-
-    for (int i = 0; i < len; i++) {
-        rem = num % 10;
-        num = num / 10;
-        retStr[len - (i + 1)] = rem + '0';
-    }
-
-    return retStr;
 }
 
 // Code slightly modified from the CS50 library

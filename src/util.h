@@ -6,6 +6,5 @@
         void braf_displayHelp(void);
         void braf_displayInfo(void);
         unsigned int braf_fileExists(const char *fileName);
-        char* braf_toString(int num);
         char* cs50_GetString(void);
 #endif

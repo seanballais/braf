@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(braf)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -std=c11 -O3")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -std=c11")
 
 add_library(braf_l STATIC src/util.c src/error_check.c src/process_files.c src/braf.c)
 add_executable(braf src/interactive_mode.c src/main.c)

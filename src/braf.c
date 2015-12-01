@@ -17,7 +17,7 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
         currChar = code[index];
         if (currChar == '+') { // Increment the value in the pointer by 1
             if (verbose) {
-                printf("Cell #%d value incremented. Original Value: %d\t", tapeIndex, (int) *dataPtr);
+                printf("Cell #%d value incremented.\nOriginal Value: %d\t", tapeIndex, (int) *dataPtr);
                 (*dataPtr)++;
                 printf("New value: %d\n", (int) *dataPtr);
             } else {
@@ -30,7 +30,7 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
             }
         } else if (currChar == '-') { // Decrement the value in the pointer by 1
             if (verbose) {
-                printf("Cell #%d value decremented. Original Value: %d\t", tapeIndex, (int) *dataPtr);
+                printf("Cell #%d value decremented.\nOriginal Value: %d\t", tapeIndex, (int) *dataPtr);
                 (*dataPtr)--;
                 printf("New value: %d\n", (int) *dataPtr);
             } else {
@@ -43,32 +43,34 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
             }
         } else if (currChar == '<') { // Move one step back in the tape
             if (verbose) {
-                printf("Active cell changed shifted to the left. \nPrevious active index: %d\t", tapeIndex);
+                printf("Active cell shifted to the left. \nPrevious active index: %d\t", tapeIndex);
                 tapeIndex--;
                 printf("Current active index: %d\n", tapeIndex);
             } else {
                 tapeIndex--;
             }
-            dataPtr--;
 
             chkResults = braf_tapeAccessCheck(tapeIndex, col, rw);
             if (chkResults) {
                 return 1;
             }
+
+            dataPtr--;
         } else if (currChar == '>') { // Move one step forward in the tape
             if (verbose) {
-                printf("Active cell changed shifted to the right. \nPrevious active index: %d\t", tapeIndex);
+                printf("Active cell shifted to the right. \nPrevious active index: %d\t", tapeIndex);
                 tapeIndex++;
                 printf("Current active index: %d\n", tapeIndex);
             } else {
                 tapeIndex++;
             }
-            dataPtr++;
 
             chkResults = braf_tapeAccessCheck(tapeIndex, col, rw);
             if (chkResults) {
                 return 1;
             }
+
+            dataPtr++;
         } else if (currChar == '.') { // Output the data
             putchar(*dataPtr);
         } else if (currChar == ',') { // Input data
