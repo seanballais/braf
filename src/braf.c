@@ -36,8 +36,8 @@
 
 unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verbose)
 {
-    int rw = 0;
-    int col = 0;
+    int rw = 1;
+    int col = 1;
     int loop = 0;
     unsigned int chkResults = 0;
     char currChar = '\0';
@@ -46,9 +46,9 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
         currChar = code[index];
         if (currChar == '+') { // Increment the value in the pointer by 1
             if (verbose) {
-                printf("Cell #%d value incremented. Original Value: %c\t", tapeIndex, *dataPtr);
+                printf("Cell #%d value incremented. Original Value: %c\t", tapeIndex, (*dataPtr + '0'));
                 (*dataPtr)++;
-                printf("New value: %c\n", *dataPtr);
+                printf("New value: %c\n", (*dataPtr + '0'));
             } else {
                 (*dataPtr)++;
             }
@@ -59,9 +59,9 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
             }
         } else if (currChar == '-') { // Decrement the value in the pointer by 1
             if (verbose) {
-                printf("Cell #%d value decremented. Original Value: %c\t", tapeIndex, *dataPtr);
+                printf("Cell #%d value decremented. Original Value: %c\t", tapeIndex, (*dataPtr + '0'));
                 (*dataPtr)--;
-                printf("New value: %c\n", *dataPtr);
+                printf("New value: %c\n", (*dataPtr + '0'));
             } else {
                 (*dataPtr)--;
             }
@@ -72,7 +72,7 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
             }
         } else if (currChar == '<') { // Move one step back in the tape
             if (verbose) {
-                printf("Active cell changed shifted to the left. Previous active index: %d\t", tapeIndex);
+                printf("Active cell changed shifted to the left. \nPrevious active index: %d\t", tapeIndex);
                 tapeIndex--;
                 printf("Current active index: %d\n", tapeIndex);
             } else {
@@ -86,7 +86,7 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
             }
         } else if (currChar == '>') { // Move one step forward in the tape
             if (verbose) {
-                printf("Active cell changed shifted to the right. Previous active index: %d\t", tapeIndex);
+                printf("Active cell changed shifted to the right. \nPrevious active index: %d\t", tapeIndex);
                 tapeIndex++;
                 printf("Current active index: %d\n", tapeIndex);
             } else {
@@ -109,9 +109,9 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
             while (loop > 0) {
                 currChar = code[--index];
                 if (currChar == '[') {
-                    loop--;
                 } else if (currChar == ']') {
                     loop++;
+                    loop--;
                 }
             }
         } else if (currChar == '\n') {

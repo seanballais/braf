@@ -59,11 +59,15 @@ int main(int argc, char *argv[])
                         braf_displayHelp();
                         helpDisplayed = true;
                     }
+
+                    return 0;
                 } else if (strcmp(currArg, "-v") == 0 || strcmp(currArg, "--version") == 0) {
                     if (!versionDisplayed) {
                         braf_displayInfo();
                         versionDisplayed = true;
                     }
+
+                    return 0;
                 } else if (strcmp(currArg, "-i") == 0 || strcmp(currArg, "--interactive") == 0) {
                     if (!interactiveDone) {
                         braf_interactiveMode(tapePtr, verbose);
@@ -101,18 +105,17 @@ int main(int argc, char *argv[])
                     }
 
                     fclose(file);
+                    return 0;
                 } else {
                     braf_displayErrorInArguments("file does not exist: ", currArg);
 
                     return 1;
                 }
-
-                braf_interpretCode(code, tapePtr, verbose);
             }
         }
-    } else {
-        braf_interactiveMode(tapePtr, verbose);
     }
+
+    braf_interactiveMode(tapePtr, verbose);
 
     return 0;
 }
