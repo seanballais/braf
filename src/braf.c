@@ -17,9 +17,9 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
         currChar = code[index];
         if (currChar == '+') { // Increment the value in the pointer by 1
             if (verbose) {
-                printf("Cell #%d value incremented. Original Value: %c\t", tapeIndex, (*dataPtr + '0'));
+                printf("Cell #%d value incremented. Original Value: %d\t", tapeIndex, (int) *dataPtr);
                 (*dataPtr)++;
-                printf("New value: %c\n", (*dataPtr + '0'));
+                printf("New value: %d\n", (int) *dataPtr);
             } else {
                 (*dataPtr)++;
             }
@@ -30,9 +30,9 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
             }
         } else if (currChar == '-') { // Decrement the value in the pointer by 1
             if (verbose) {
-                printf("Cell #%d value decremented. Original Value: %c\t", tapeIndex, (*dataPtr + '0'));
+                printf("Cell #%d value decremented. Original Value: %d\t", tapeIndex, (int) *dataPtr);
                 (*dataPtr)--;
-                printf("New value: %c\n", (*dataPtr + '0'));
+                printf("New value: %d\n", (int) *dataPtr);
             } else {
                 (*dataPtr)--;
             }
