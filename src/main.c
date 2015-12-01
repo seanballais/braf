@@ -46,20 +46,17 @@ int main(int argc, char *argv[])
     bool verbose = false;
     if (argc > 1) {
         for (int argIndex = 1; argIndex < argc; argIndex++) {
-            char *currArg = argv[argIndex];
-            if (currArg[0] == '-') { // Argument is a flag
-                if (strcmp(currArg, "-h") != 0 || strcmp(currArg, "--help") != 0 ||
-                    strcmp(currArg, "-v") != 0 || strcmp(currArg, "--version") != 0 ||
-                    strcmp(currArg, "-i") != 0 || strcmp(currArg, "--interactive") != 0 ||
-                    strcmp(currArg, "-d") != 0 || strcmp(currArg, "--debug") != 0 ||
-                    strcmp(currArg, "--verbose") != 0) {
-                    braf_displayErrorInArguments("unknown arguments: ", currArg);
+            char currArg[256];
+            strcpy(currArg, argv[argIndex]);
+            printf("We're good here. Current argument: %s\n", currArg);
+            if (strcmp(currArg, "-h") != 0 || strcmp(currArg, "--help") != 0 ||
+                strcmp(currArg, "-v") != 0 || strcmp(currArg, "--version") != 0 ||
+                strcmp(currArg, "-i") != 0 || strcmp(currArg, "--interactive") != 0 ||
+                strcmp(currArg, "-d") != 0 || strcmp(currArg, "--debug") != 0 ||
+                strcmp(currArg, "--verbose") != 0) { // Argument is a flag
+                braf_displayErrorInArguments("unknown arguments: ", currArg);
 
-                    return 1;
-                } else if (strcmp(currArg, "-d") == 0 || strcmp(currArg, "--debug") == 0 ||
-                           strcmp(currArg, "--verbose") == 0) {
-                    verbose = true;
-                }
+                return 1;
             } else { // Argument is probably a file
                 if (!braf_fileExists(currArg)) {
                     braf_displayErrorInArguments("file does not exist: ", currArg);
@@ -92,6 +89,13 @@ int main(int argc, char *argv[])
                     braf_interactiveMode(tapePtr, verbose);
                     interactiveDone = true;
                 }
+            } else if (strcmp(currArg, "-d") == 0 || strcmp(currArg, "--debug") == 0 ||
+                       strcmp(currArg, "--verbose") == 0) {
+                if (verbose) {
+                    verbose = false;
+                } else if (!verbose) {
+                    verbose = true;
+                }
             } else { // Handle the files
                 char *code;
                 char currChar = 0;
@@ -107,6 +111,8 @@ int main(int argc, char *argv[])
                 braf_interpretCode(code, tapePtr, verbose);
             }
         }
+    } else {
+        braf_interactiveMode(tapePtr, verbose);
     }
 
     return 0;

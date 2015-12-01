@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 // Inspired from the Python REPL
 void braf_interactiveMode(char *dataPtr, const bool verbose)
@@ -44,9 +45,15 @@ void braf_interactiveMode(char *dataPtr, const bool verbose)
     // Get the code
     char codeChar;
     char *code;
-    do {
-        printf("\n>>> ");
+    while (true) {
+        printf(">>> ");
         code = cs50_GetString();
+        if (strcmp(code, "Exit") == 0 || strcmp(code, "EXIT") == 0 || strcmp(code, "exit") == 0) {
+            break;
+        }
+
         braf_interpretCode(code, dataPtr, verbose);
-    } while (strcmp(code, "Exit") != 0);
+        printf("\n");
+
+    }
 }
