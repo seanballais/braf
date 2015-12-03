@@ -23,7 +23,7 @@ It's that simple!
 ### Using braf
 braf is ran from the Terminal. Here's the list of commands available in braf.
 
-Usage: braf &#91;options&#93; <input files>    
+Usage: braf \[options\] \<input files\>    
 #### Available options
 | Flags               | Description |
 |---------------------|-------------|
