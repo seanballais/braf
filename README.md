@@ -17,7 +17,7 @@ Brainfuck is a Turing-complete minimalistic programming language that only has 8
 ]    End of a loop. Skip the loop when the value of the current cell is 0.    
 ```
 
-**It's that simple!**
+It's that simple!
 
 ### Using braf
 braf is ran from the Terminal. Here's the list of commands available in braf.
