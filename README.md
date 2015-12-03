@@ -57,9 +57,9 @@ To use braf inside your applications, include the braf header file at the top of
 
 The braf library only contains one function, `braf_interpretCode()`.
 
-
-    unsigned int braf_interpretCode(const char &ast;code, char &ast;dataPtr, bool verbose);
-
+```
+    unsigned int braf_interpretCode(const char *code, char *dataPtr, bool verbose);
+```
 `*code`         The Brainfuck code that you want to interpret.    
 `*dataPtr`      Pointer to an application's tape. The application must provide its own tape.    
 `verbose`       When set to true, the library will print out any operations, such as incrementing or decrementing values, done during interpretation.    
