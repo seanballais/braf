@@ -43,9 +43,9 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
             }
         } else if (currChar == '<') { // Move one step back in the tape
             if (verbose) {
-                printf("Active cell shifted to the left. \nPrevious active index: %d\t", tapeIndex);
+                printf("Active cell shifted to the left. \nPrevious active cell: %d\t", tapeIndex);
                 tapeIndex--;
-                printf("Current active index: %d\n", tapeIndex);
+                printf("Current active cell: %d\n", tapeIndex);
             } else {
                 tapeIndex--;
             }
@@ -58,9 +58,9 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
             dataPtr--;
         } else if (currChar == '>') { // Move one step forward in the tape
             if (verbose) {
-                printf("Active cell shifted to the right. \nPrevious active index: %d\t", tapeIndex);
+                printf("Active cell shifted to the right. \nPrevious active cell: %d\t", tapeIndex);
                 tapeIndex++;
-                printf("Current active index: %d\n", tapeIndex);
+                printf("Current active cell: %d\n", tapeIndex);
             } else {
                 tapeIndex++;
             }
@@ -76,11 +76,13 @@ unsigned int braf_interpretCode(const char *code, char *dataPtr, const bool verb
         } else if (currChar == ',') { // Input data
             *dataPtr = getchar();
         } else if (currChar == '[') { // Start of a loop
+            col++;
             continue;
         } else if (currChar == ']' && *dataPtr) { // End of a loop
             loop = 1;
             while (loop > 0) {
                 currChar = code[--index];
+                col--;
                 if (currChar == '[') {
                     loop--;
                 } else if (currChar == ']') {
