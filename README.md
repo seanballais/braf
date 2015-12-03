@@ -33,3 +33,46 @@ Options:
 ```
 
 braf can accept multiple input files.
+
+### Compiling braf
+Compiling braf is primarily performed by a Bash script that utilizes the CMake build system. Make sure CMake (version >= 2.8) is installed in your system. The build script will install the compiled files in a `bin` folder, while the braf header file will be installed in a `include` folder. To install braf in a different directory, edit `CMAKE_INSTALL_PREFIX` in `build.sh` to make sure braf will be installed in your specified directory.
+
+```
+$ cd /path/to/braf/code        
+$ chmod +x build.sh    
+$ ./build.sh    
+```    
+
+braf can also be compiled manually. braf has been designed to not depend on any third party libraries to eliminate dependencies and make is simpler. To compile manually, type the following in the terminal. Make sure a C compiler that supports C99 or C11 is installed in your system.
+
+```
+$ clang -Werror -Wall -std=c11 -g src/util.c src/error_check.c src/process_files.c src/braf.c src/interactive_mode.c src/main.c -o bin/braf    
+```
+
+### braf Library
+braf provides a static library that can be embedded inside applications.
+
+#### Using the braf library
+To use braf inside your applications, include the braf header file at the top of your application. Then link the braf library to your application during compilation.
+
+The braf library only contains one function, `braf_interpretCode()`.
+
+
+    unsigned int braf_interpretCode(const char \*code, char \*dataPtr, bool verbose);
+
+`*code` - brainfuck that you want to interpret.    
+`*dataPtr` - pointer to an application's tape. The application must provide its own tape.    
+`verbose` - When set to true, the library will print out any operations, such as incrementing or decrementing values, done during interpretation.    
+
+#### Compiling the braf library
+If you compiled braf using `./build.sh`, the braf library will be compiled also.    
+If you prefer compiling the library manually, type the following in the terminal.
+
+
+    $ clang -Werror -Wall -std=c11 -g src/util.c src/error_check.c src/process_files.c src/braf.c -o libbraf-dev
+
+### Copyright
+Copyright &copy; 2015. All Rights Reserved. Sean Ballais, Bea Santiago, Kenneth Cu, & Ivan Puayap.
+
+### License
+braf is licensed under the MIT License. View the license [here](LICENSE.md).
