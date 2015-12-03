@@ -60,14 +60,13 @@ The braf library only contains one function, `braf_interpretCode()`.
 ```
     unsigned int braf_interpretCode(const char *code, char *dataPtr, bool verbose);
 ```
-`*code`         The Brainfuck code that you want to interpret.    
-`*dataPtr`      Pointer to an application's tape. The application must provide its own tape.    
-`verbose`       When set to true, the library will print out any operations, such as incrementing or decrementing values, done during interpretation.    
+`*code` - The Brainfuck code that you want to interpret.    
+`*dataPtr` - Pointer to an application's tape. The application must provide its own tape.    
+`verbose` - When set to true, the library will print out any operations, such as incrementing or decrementing values, done during interpretation.    
 *Return value*: returns 1 if an error occurred, returns 0 otherwise.     
 
 #### Compiling the braf library
-If you compiled braf using `./build.sh`, the braf library will be compiled also.    
-If you prefer compiling the library manually, type the following in the terminal.
+If you compiled braf using `./build.sh`, the braf library will be compiled also. If you prefer compiling the library manually, type the following in the terminal.
 
 
     $ clang -Werror -Wall -std=c11 -g src/util.c src/error_check.c src/process_files.c src/braf.c -o libbraf-dev
